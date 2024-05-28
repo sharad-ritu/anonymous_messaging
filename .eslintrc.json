@@ -29,6 +29,8 @@
     "quotes": ["error", "single"],  // Enforce single quotes
     "comma-dangle": ["error", "always-multiline"],
     "arrow-spacing": ["error", { "before": true, "after": true }],
+    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+    "indent": ["error", "tab"],
     "prefer-const": "error",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
