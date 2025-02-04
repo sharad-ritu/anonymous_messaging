@@ -61,7 +61,7 @@ export async function POST(req: Request) {
 				verifyCode,
 				verifyCodeExpiry: expiryDate,
 				isVerified: false,
-				isAcceptingMessage: true,
+				isAcceptingMessages: true,
 				messages: [],
 			});
 
