@@ -9,6 +9,17 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended"
   ],
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    "build/",
+    "public/",
+    "coverage/",
+    "next-env.d.ts",
+    "*.config.js",
+    "*.config.ts",
+    "*.config.cjs"
+  ],
   "plugins": [
     "@typescript-eslint",
     "react",
