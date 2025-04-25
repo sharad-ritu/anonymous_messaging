@@ -53,39 +53,47 @@ const MessageCard = ({message, onMessageDelete}: MessageCardProps) => {
 	};
 
 	return (
-		<Card className="card-bordered">
+		<Card className="bg-white/10 border border-white/10 backdrop-blur-sm text-white rounded-2xl shadow-lg p-4">
 			<CardHeader>
-				<div className="flex justify-between items-center">
-					<CardTitle>{message.content}</CardTitle>
+				<div className="flex justify-between items-start md:items-center flex-col md:flex-row gap-3">
+					<CardTitle className="text-base md:text-lg font-semibold text-white">
+						{message.content}
+					</CardTitle>
 					<AlertDialog>
 						<AlertDialogTrigger asChild>
-							<Button variant='destructive'>
-								<X className="w-5 h-5" />
+							<Button
+								variant="destructive"
+								className="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-md"
+							>
+								<X className="w-4 h-4" />
 							</Button>
 						</AlertDialogTrigger>
-						<AlertDialogContent>
+						<AlertDialogContent className="bg-gray-900 text-white border border-white/10 rounded-xl">
 							<AlertDialogHeader>
 								<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-								<AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete this message.
+								<AlertDialogDescription className="text-sm text-indigo-200">
+									This action cannot be undone. This will permanently delete this message.
 								</AlertDialogDescription>
 							</AlertDialogHeader>
 							<AlertDialogFooter>
-								<AlertDialogCancel>
-                  Cancel
+								<AlertDialogCancel className="bg-white/10 text-indigo-100 hover:bg-white/20 transition rounded-md">
+									Cancel
 								</AlertDialogCancel>
-								<AlertDialogAction onClick={handleDeleteConfirm}>
-                  Continue
+								<AlertDialogAction
+									onClick={handleDeleteConfirm}
+									className="bg-red-600 hover:bg-red-700 text-white rounded-md"
+								>
+									Continue
 								</AlertDialogAction>
 							</AlertDialogFooter>
 						</AlertDialogContent>
 					</AlertDialog>
 				</div>
-				<div className="text-sm">
+				<div className="text-sm text-indigo-300 mt-2">
 					{dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
 				</div>
 			</CardHeader>
-			<CardContent></CardContent>
+			<CardContent>{/* Optional: Add extra content here */}</CardContent>
 		</Card>
 	);
 };

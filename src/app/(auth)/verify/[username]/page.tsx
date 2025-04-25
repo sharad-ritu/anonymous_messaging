@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { verifySchema } from '@/schemas/verifySchema';
 import { ApiResponse } from '@/types/ApiResponse';
-import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -52,14 +52,17 @@ export default function Verify() {
 	};
 
 	return (
-		<div className="flex justify-center items-center min-h-screen bg-gray-100">
-			<div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+		<div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-800">
+			<div className="w-full max-w-md p-8 space-y-8 bg-white/10 backdrop-blur-md border border-white/10 text-white rounded-2xl shadow-xl">
 				<div className="text-center">
-					<h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Verify Your Account
+					<h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-violet-400 to-sky-400 text-transparent bg-clip-text mb-4">
+						Verify Your Account
 					</h1>
-					<p className="mb-4">Enter the verification code sent to your email</p>
+					<p className="text-indigo-200 text-sm">
+						Enter the verification code sent to your email
+					</p>
 				</div>
+
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 						<FormField
@@ -67,13 +70,24 @@ export default function Verify() {
 							control={form.control}
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Verification Code</FormLabel>
-									<Input {...field} />
+									<FormLabel className="text-indigo-100">Verification Code</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											placeholder="123456"
+											className="bg-white/10 text-white border border-white/20 placeholder:text-indigo-300"
+										/>
+									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
-						<Button type="submit" disabled={isLoading}>
+
+						<Button
+							type="submit"
+							disabled={isLoading}
+							className="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition"
+						>
 							{isLoading ? (
 								<>
 									<Loader2 className="mr-2 h-4 w-4 animate-spin" /> Verifying...

@@ -10,7 +10,6 @@ import { useForm } from 'react-hook-form';
 import { ApiResponse } from '@/types/ApiResponse';
 import { Message } from '@/model/User';
 import { Switch } from '@/components/ui/switch';
-import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { acceptMessagesSchema } from '@/schemas/acceptMessageSchema';
@@ -134,61 +133,82 @@ function UserDashboard() {
 	};
 
 	return (
-		<div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
-			<h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+		<div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-800">
+			<div className="w-full max-w-6xl p-8 space-y-8 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-2xl shadow-xl">
+				<h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-violet-400 to-sky-400 text-transparent bg-clip-text mb-6">
+					User Dashboard
+				</h1>
 
-			<div className="mb-4">
-				<h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
-				<div className="flex items-center">
-					<input
-						type="text"
-						value={profileUrl}
-						disabled
-						className="input input-bordered w-full p-2 mr-2"
-					/>
-					<Button onClick={copyToClipboard}>Copy</Button>
-				</div>
-			</div>
-
-			<div className="mb-4">
-				<Switch
-					{...register('acceptMessages')}
-					checked={acceptMessages}
-					onCheckedChange={handleSwitchChange}
-					disabled={isSwitchLoading}
-				/>
-				<span className="ml-2">
-          Accept Messages: {acceptMessages ? 'On' : 'Off'}
-				</span>
-			</div>
-			<Separator />
-
-			<Button
-				className="mt-4"
-				variant="outline"
-				onClick={(e) => {
-					e.preventDefault();
-					fetchMessages(true);
-				}}
-			>
-				{isLoading ? (
-					<Loader2 className="h-4 w-4 animate-spin" />
-				) : (
-					<RefreshCcw className="h-4 w-4" />
-				)}
-			</Button>
-			<div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-				{messages.length > 0 ? (
-					messages.map((message) => (
-						<MessageCard
-							key={message._id}
-							message={message}
-							onMessageDelete={handleDeleteMessage}
+				{/* Unique Link Section */}
+				<div className="mb-6">
+					<h2 className="text-lg font-semibold text-indigo-100 mb-2">Copy Your Unique Link</h2>
+					<div className="flex items-center">
+						<input
+							type="text"
+							value={profileUrl}
+							disabled
+							className="bg-white/10 text-white border border-white/20 p-2 rounded-md mr-2 placeholder:text-indigo-300 w-full md:w-[400px]"
 						/>
-					))
-				) : (
-					<p>No messages to display.</p>
-				)}
+						<Button
+							onClick={copyToClipboard}
+							className="bg-indigo-600 hover:bg-indigo-700 text-white transition rounded-xl"
+						>
+      Copy
+						</Button>
+					</div>
+				</div>
+
+				{/* Accept Messages Switch */}
+				<div className="mb-6 flex items-center">
+					<Switch
+						{...register('acceptMessages')}
+						checked={acceptMessages}
+						onCheckedChange={handleSwitchChange}
+						disabled={isSwitchLoading}
+					/>
+					<span className="ml-3 text-sm text-indigo-100">
+						Accept Messages:{' '}
+						<span className={acceptMessages ? 'text-green-500' : 'text-red-500'}>
+							{acceptMessages ? 'On' : 'Off'}
+						</span>
+					</span>
+				</div>
+
+				{/* Refresh Button */}
+				<Button
+					className="w-full bg-indigo-600 hover:bg-indigo-700 text-white transition rounded-xl"
+					onClick={(e) => {
+						e.preventDefault();
+						fetchMessages(true);
+					}}
+				>
+					{isLoading ? (
+						<>
+							<Loader2 className="h-4 w-4 animate-spin mr-2" />
+							Refreshing...
+						</>
+					) : (
+						<>
+							<RefreshCcw className="h-4 w-4 mr-2" />
+							Refresh
+						</>
+					)}
+				</Button>
+
+				{/* Messages */}
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					{messages.length > 0 ? (
+						messages.map((message) => (
+							<MessageCard
+								key={message._id}
+								message={message}
+								onMessageDelete={handleDeleteMessage}
+							/>
+						))
+					) : (
+						<p className="text-indigo-200">No messages to display.</p>
+					)}
+				</div>
 			</div>
 		</div>
 	);

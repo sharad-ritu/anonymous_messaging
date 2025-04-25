@@ -68,14 +68,15 @@ export default function SignInForm() {
 	};
 
 	return (
-		<div className="flex justify-center items-center min-h-screen bg-gray-100">
-			<div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+		<div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-800">
+			<div className="w-full max-w-md p-8 space-y-8 bg-white/10 backdrop-blur-md border border-white/10 text-white rounded-2xl shadow-xl">
 				<div className="text-center">
-					<h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl mb-6">
-            Welcome Back to Anonymous Messaging
+					<h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-violet-400 to-sky-400 text-transparent bg-clip-text mb-4">
+						Welcome Back
 					</h1>
-					<p className="mb-4">Sign in to continue your secret conversations</p>
+					<p className="text-indigo-200 text-sm">Sign in to continue your secret conversations</p>
 				</div>
+
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 						<FormField
@@ -83,24 +84,37 @@ export default function SignInForm() {
 							control={form.control}
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Email/Username</FormLabel>
-									<Input {...field} />
+									<FormLabel className="text-indigo-100">Email/Username</FormLabel>
+									<Input
+										{...field}
+										className="bg-white/10 text-white border border-white/20 placeholder:text-indigo-300"
+									/>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
+
 						<FormField
 							name="password"
 							control={form.control}
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Password</FormLabel>
-									<Input type="password" {...field} />
+									<FormLabel className="text-indigo-100">Password</FormLabel>
+									<Input
+										type="password"
+										{...field}
+										className="bg-white/10 text-white border border-white/20 placeholder:text-indigo-300"
+									/>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
-						<Button className='w-full' type="submit" disabled={isLoading}>
+
+						<Button
+							type="submit"
+							disabled={isLoading}
+							className="w-full bg-indigo-600 hover:bg-indigo-700 text-white transition rounded-xl"
+						>
 							{isLoading ? (
 								<>
 									<Loader2 className="mr-2 h-4 w-4 animate-spin" /> Signing In...
@@ -111,11 +125,15 @@ export default function SignInForm() {
 						</Button>
 					</form>
 				</Form>
-				<div className="text-center mt-4">
+
+				<div className="text-center mt-4 text-indigo-200 text-sm">
 					<p>
-            Not a member yet?{' '}
-						<Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
-              Sign up
+						Not a member yet?{' '}
+						<Link
+							href="/sign-up"
+							className="text-sky-400 hover:text-sky-300 underline transition"
+						>
+							Sign up
 						</Link>
 					</p>
 				</div>

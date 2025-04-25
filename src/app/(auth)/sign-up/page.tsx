@@ -88,88 +88,78 @@ const Page = () => {
 	};
 
 	return (
-		<div className='flex justify-center items-center min-h-screen bg-gray-100'>
-			<div className='w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md'>
+		<div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-800">
+			<div className="w-full max-w-md p-8 space-y-8 bg-white/10 backdrop-blur-md border border-white/10 text-white rounded-2xl shadow-xl">
 				<div className="text-center">
-					<h1 className="text-3xl font-bold tracking-tight lg:text-4xl mb-6">
-            Welcome To Anonymous Messaging
+					<h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-violet-400 to-sky-400 text-transparent bg-clip-text mb-4">
+						Welcome to Anonymous Messaging
 					</h1>
-					<p className="mb-4">Sign in to continue your secret conversations</p>
+					<p className="text-indigo-200 text-sm">Create your account and keep your identity private.</p>
 				</div>
+
 				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+						{/* Username Field */}
 						<FormField
 							name="username"
 							control={form.control}
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Username</FormLabel>
+									<FormLabel className="text-indigo-100">Username</FormLabel>
 									<FormControl>
 										<Input
-											placeholder='Your username'
+											placeholder="Your username"
 											{...field}
+											className="bg-white/10 text-white border border-white/20 placeholder:text-indigo-300"
 											onChange={(e) => {
 												field.onChange(e);
 												debounced(e.target.value);
 											}}
 										/>
 									</FormControl>
-									{isCheckingUsername && (
-										<Loader2 className='animate-spin' />
-									)}
-									<p className={`text-sm ${usernameMessage === 'Username is unique' ? 'text-green-500' : 'text-red-500'}`}>
+									{isCheckingUsername && <Loader2 className="animate-spin text-indigo-300 h-4 w-4 mt-1" />}
+									<p className={`text-sm ${usernameMessage === 'Username is unique' ? 'text-green-400' : 'text-red-400'}`}>
 										{usernameMessage}
 									</p>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
+
+						{/* Email Field */}
 						<FormField
 							name="email"
 							control={form.control}
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Email</FormLabel>
+									<FormLabel className="text-indigo-100">Email</FormLabel>
 									<FormControl>
 										<Input
 											type="email"
-											placeholder='Your email'
+											placeholder="Your email"
 											{...field}
+											className="bg-white/10 text-white border border-white/20 placeholder:text-indigo-300"
 										/>
 									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
-						{/* <FormField
-							name="password"
-							control={form.control}
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Password</FormLabel>
-									<FormControl>
-										<Input
-											type="password"
-											placeholder='Your password'
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/> */}
+
+						{/* Password Field */}
 						<FormField
 							name="password"
 							control={form.control}
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Password</FormLabel>
+									<FormLabel className="text-indigo-100">Password</FormLabel>
 									<FormControl>
 										<div className="relative">
 											<Input
 												type={showPassword ? 'text' : 'password'}
-												placeholder='Your password'
+												placeholder="Your password"
 												{...field}
+												className="bg-white/10 text-white border border-white/20 placeholder:text-indigo-300 pr-10"
 											/>
 											<Button
 												type="button"
@@ -179,9 +169,9 @@ const Page = () => {
 												onClick={() => setShowPassword(!showPassword)}
 											>
 												{showPassword ? (
-													<EyeOff className="h-4 w-4 text-gray-500" />
+													<EyeOff className="h-4 w-4 text-indigo-400" />
 												) : (
-													<Eye className="h-4 w-4 text-gray-500" />
+													<Eye className="h-4 w-4 text-indigo-400" />
 												)}
 											</Button>
 										</div>
@@ -190,20 +180,33 @@ const Page = () => {
 								</FormItem>
 							)}
 						/>
-						<Button type='submit' disabled={isSubmitting}>
+
+						{/* Submit Button */}
+						<Button
+							type="submit"
+							disabled={isSubmitting}
+							className="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition"
+						>
 							{isSubmitting ? (
 								<>
-									<Loader2 className='mr-2 h-4 w-4 animate-spin' /> Signing Up...
+									<Loader2 className="mr-2 h-4 w-4 animate-spin" /> Signing Up...
 								</>
-							) : 'Sign Up'}
+							) : (
+								'Sign Up'
+							)}
 						</Button>
 					</form>
 				</Form>
-				<div className="text-center mt-4">
+
+				{/* Already have account */}
+				<div className="text-center mt-4 text-indigo-200 text-sm">
 					<p>
-            Already a member?{' '}
-						<Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
-              Sign in
+						Already a member?{' '}
+						<Link
+							href="/sign-in"
+							className="text-sky-400 hover:text-sky-300 underline transition"
+						>
+							Sign in
 						</Link>
 					</p>
 				</div>
